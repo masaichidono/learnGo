@@ -16,9 +16,8 @@ func my() error {
 	query := "" //查询语句
 
 	info, err := db.Exec(query) //查询数据
-
 	if err == sql.ErrNoRows {
-		//包装一下，记录下查询的参数,然后返回
+		//wrap这个error到上层，因为需要记录一些错误信息，方便定位
 		return fmt.Errorf("data not found, sql: %s", query)
 	}
 	//处理业务逻辑
